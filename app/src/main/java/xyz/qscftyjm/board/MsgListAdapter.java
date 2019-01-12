@@ -10,11 +10,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class MsgListAdapter extends BaseAdapter {
+public class MsgListAdapter extends BaseAdapter implements View.OnClickListener {
 
     ArrayList<Msg> msgList;
     Context context;
     ViewHolder viewHolder;
+    ItemMoreClickListener itemMoreClickListener;
 
     public MsgListAdapter(ArrayList<Msg> msgList, Context context){
         this.context=context;this.msgList=msgList;
@@ -56,20 +57,37 @@ public class MsgListAdapter extends BaseAdapter {
             viewHolder.picture.setImageBitmap(msgList.get(position).getPicture()[0]);
         }
 
+        viewHolder.more.setOnClickListener(this);
+        viewHolder.portrait.setOnClickListener(this);
 
         return convertView;
     }
 
+    @Override
+    public void onClick(View v) {
+        itemMoreClickListener.itemClick(v);
+    }
+
+    public void setOnInnerItemOnClickListener(ItemMoreClickListener listener){
+        this.itemMoreClickListener=listener;
+    }
+
+    interface ItemMoreClickListener{
+        void itemClick(View v);
+    }
+
     class ViewHolder{
-        ImageView portrait, picture;
+        ImageView portrait, picture, more;
         TextView time, nickname, content;
 
         public ViewHolder(View view) {
             portrait=view.findViewById(R.id.msg_head_portrait);
             picture=view.findViewById(R.id.msg_picture);
+            more=view.findViewById(R.id.msg_more);
             time=view.findViewById(R.id.msg_time);
             nickname=view.findViewById(R.id.msg_nickname);
             content=view.findViewById(R.id.msg_content);
+
         }
     }
 

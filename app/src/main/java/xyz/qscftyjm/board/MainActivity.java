@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-
         bottomNavigationView=findViewById(R.id.main_bottom_navigation);
         mainViewPager=findViewById(R.id.main_parent_frag);
 

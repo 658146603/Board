@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -49,16 +50,13 @@ public class MsgDataOperator {
         Cursor cursor;
         cursor = database.query("userinfo", new String[] {"token"}, null, null, null, null, "id desc", "0,1");
         int count = 0;
-        while (cursor.moveToFirst()){
+        if(cursor.moveToFirst()){
             count=cursor.getCount();
-            break;
         }
-        Log.d(TAG, count+"");
-        Log.d(TAG, token);
         if(count>0) {
             do {
                 token = cursor.getString(0);
-                Log.d(TAG, token);
+                Log.d(TAG, "token : "+token);
             } while (cursor.moveToNext());
             cursor.close();
         }
@@ -83,6 +81,14 @@ public class MsgDataOperator {
                                 if(msgArr!=null&&msgArr.length()>0){
                                     for (int i=0;i<msgArr.length();i++){
                                         msgs.add(new Msg(msgArr.getJSONObject(i).optInt("id",-1),msgArr.getJSONObject(i).optString("username","null"),"nickname",msgArr.getJSONObject(i).optString("time","1970/1/1 08:00:00"),msgArr.getJSONObject(i).optString("content","null"),BitMapUtil.getDefaultPortrait(context),true,BitMapUtil.getDefaultPics(context)));
+//                                        ContentValues values=new ContentValues();
+//                                        values.put("token", data.optString("credit","null"));
+//                                        //values.put("username",data.optString("username","null"));
+//                                        values.put("nickname",data.optString("nickname","null"));
+//                                        values.put("checktime", TimeUtil.getTime());
+//                                        String userid=data.optString("username","null");
+//                                        database.update("userinfo", values, "userid = ?", new String[] { userid });
+//                                        Log.d(TAG, "更新留言数据 ");
                                     }
                                 } else {
                                     msgs.add(new Msg(0,"null","null","2019/01/01","没有新的留言",BitMapUtil.getDefaultPortrait(context),true,BitMapUtil.getDefaultPics(context)));
@@ -97,6 +103,8 @@ public class MsgDataOperator {
 //                                database.update("userinfo", values, "userid = ?", new String[] { userid });
 //                                Log.d(TAG, "更新账号数据 "+userid);
                                 MsgListAdapter adapter=new MsgListAdapter(msgs,context);
+                                //adapter.itemMoreClickListener(this);
+
                                 listView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
 
@@ -127,4 +135,19 @@ public class MsgDataOperator {
         return msgs;
     }
 
+//    public void itemClick(View v) {
+//        int position;
+//        position = (Integer) v.getTag();
+//        switch (v.getId()) {
+//            case R.id.msg_more:
+//                Log.d("Board", "more@"+position);
+//                break;
+//            case R.id.msg_head_portrait:
+//                Log.d("Board", "portrait@"+position);
+//                break;
+//            default:
+//                break;
+//        }
+//
+//    }
 }
