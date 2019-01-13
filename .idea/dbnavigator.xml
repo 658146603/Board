@@ -27,8 +27,8 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="4dc7fadc-2fc4-4557-a9ad-633adc9b4e1a">
-      <console name="Connection" type="STANDARD" schema="main" session="Main">select * from userinfo;
-select * from msg;</console>
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from userinfo;
+select * from msg;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
