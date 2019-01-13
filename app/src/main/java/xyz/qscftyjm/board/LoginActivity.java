@@ -72,8 +72,8 @@ public class LoginActivity extends AppCompatActivity {
                                     jsonObj=new JSONObject(response);
                                     int code=jsonObj.optInt("code",-1);
                                     //Toast.makeText(LoginActivity.this, String.valueOf(status), Toast.LENGTH_SHORT).show();
-                                    if(code==0) {
-                                        Toast.makeText(LoginActivity.this, "欢迎 "+jsonObj.optString("nickname")+" ！正在跳转到主界面......", Toast.LENGTH_SHORT).show();
+                                    if(code==200) {//TODO data JSONObject
+                                        Toast.makeText(LoginActivity.this, "欢迎 "+jsonObj.optString("nickname")+" ！正在跳转到主界面...", Toast.LENGTH_SHORT).show();
                                         BoardDBHelper sqLiteHelper=BoardDBHelper.getMsgDBHelper(LoginActivity.this);
                                         SQLiteDatabase database=sqLiteHelper.getWritableDatabase();
 
@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Intent intent=new Intent(LoginActivity.this, MainActivity.class);
                                         startActivity(intent);
                                         finish();
-                                    }else if(code<0) {
+                                    }else{
                                         Toast.makeText(LoginActivity.this,jsonObj.optString("msg","未知错误"),Toast.LENGTH_LONG).show();
                                     }
 

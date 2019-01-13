@@ -11,21 +11,21 @@ import org.json.JSONObject;
 public class ParamToString {
 
     public static String formLogin(String userid, String password) {
-        //method=login&userid=10001&password=E10ADC3949BA59ABBE56E057F20F883E
-        String result="method=login"+"&userid="+userid+"&password="+MD5Util.getMd5(password);
+        String result="method=login"+"&username="+userid+"&password="+password+"&devicetype=mobile";
+
         return result;
 
     }
 
-    public static String formAutoLogin(String userid, String token) {
-        //method=autologin&userid=10001&token=f2b03e3a64c142519fd1066714fa217b
-        String result="method=autologin&userid="+userid+"&token="+token;
+    public static String formAutoLogin(String token) {
+        String result="method=autologin"+"&credit="+token;
+
         return result;
+
     }
 
     public static String formRegister(String nickname, String password) {
-        //method=register&nickname=test&password=E10ADC3949BA59ABBE56E057F20F883E
-        String result="method=register"+"&nickname="+nickname+"&password="+MD5Util.getMd5(password);
+        String result="method=register2"+"&nickname="+nickname+"&password="+password;
         return result;
 
     }

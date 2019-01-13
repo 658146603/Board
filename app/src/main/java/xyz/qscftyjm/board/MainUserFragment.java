@@ -67,7 +67,7 @@ public class MainUserFragment extends Fragment implements View.OnClickListener {
 
         setUserInfo(tv_userid,tv_nickname,img_head_portrait,bt_login_info,database);
 
-        Log.d(TAG, "userid "+userid+" nickname "+nickname+" email "+email+" priority "+priority);
+        Log.d(TAG, "userid: "+userid+" nickname: "+nickname+" email: "+email+" priority: "+priority);
         Log.d(TAG,tv_userid.getText().toString());
 
         return view;
