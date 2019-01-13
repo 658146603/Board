@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" android:padding="16dp"
+    tools:context=".MoreInfoActivity">
+
+    <ImageView
+        android:id="@+id/user_info_portrait"
+        android:layout_width="72dp"
+        android:layout_height="72dp" android:layout_marginTop="32dp"
+        android:layout_gravity="center_horizontal"
+        app:srcCompat="@drawable/user" />
+    <LinearLayout android:background="@drawable/border"
+        android:layout_width="match_parent" android:layout_marginTop="32dp"
+        android:layout_height="40dp" android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content" android:paddingLeft="8dp" android:paddingRight="8dp"
+            android:layout_height="match_parent" android:text="用户 ID" android:textSize="24sp" android:gravity="center_vertical" />
+        <View
+            android:layout_width="1dp" android:background="#999999"
+            android:layout_height="match_parent"/>
+        <TextView android:id="@+id/user_info_userid"
+            android:layout_width="match_parent" android:textIsSelectable="true"
+            android:layout_height="match_parent" android:paddingRight="8dp"
+            android:text="请登录账号" android:maxLines="1" android:ellipsize="end"
+            android:textSize="20sp" android:gravity="center_vertical|right"/>
+    </LinearLayout>
+    <LinearLayout android:background="@drawable/border"
+        android:layout_width="match_parent" android:layout_marginTop="16dp"
+        android:layout_height="40dp" android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content" android:paddingLeft="8dp" android:paddingRight="8dp"
+            android:layout_height="match_parent" android:text="昵     称" android:textSize="24sp" android:gravity="center_vertical" />
+        <View
+            android:layout_width="1dp" android:background="#999999"
+            android:layout_height="match_parent"/>
+        <TextView android:id="@+id/user_info_nickname"
+            android:layout_width="match_parent" android:textIsSelectable="true"
+            android:layout_height="match_parent" android:paddingRight="8dp"
+            android:text="请登录账号" android:maxLines="1" android:ellipsize="end"
+            android:textSize="20sp" android:gravity="center_vertical|right"/>
+    </LinearLayout>
+
+    <LinearLayout android:background="@drawable/border"
+        android:layout_width="match_parent" android:layout_marginTop="16dp"
+        android:layout_height="40dp" android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content" android:paddingLeft="8dp" android:paddingRight="8dp"
+            android:layout_height="match_parent" android:text="邮     箱" android:textSize="24sp" android:gravity="center_vertical" />
+        <View
+            android:layout_width="1dp" android:background="#999999"
+            android:layout_height="match_parent"/>
+        <TextView android:id="@+id/user_info_email"
+            android:layout_width="match_parent" android:textIsSelectable="true"
+            android:layout_height="match_parent" android:paddingRight="8dp"
+            android:text="请登录账号" android:maxLines="1" android:ellipsize="end"
+            android:textSize="20sp" android:gravity="center_vertical|right"/>
+    </LinearLayout>
+
+    <Button android:id="@+id/user_info_change_info"
+        android:layout_width="match_parent" android:layout_marginTop="32dp" android:background="@drawable/border"
+        android:layout_height="40dp" android:text="修改信息" android:textSize="18sp" />
+</LinearLayout>

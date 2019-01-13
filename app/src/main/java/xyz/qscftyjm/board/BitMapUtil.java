@@ -23,4 +23,16 @@ public class BitMapUtil {
         return bitmaps;
     }
 
+    public static Bitmap getBitmap(Context context,byte[] bytes){
+        Bitmap bitmap;
+        if(bytes.length<32){
+            bitmap = getDefaultPortrait(context);
+        } else {
+            bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        }
+
+
+        return bitmap;
+    }
+
 }

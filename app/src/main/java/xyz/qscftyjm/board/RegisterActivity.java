@@ -12,8 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import postutil.AsynTaskUtil;
-import tools.MD5Util;
-import tools.ParamToJSON;
+import tools.ParamToString;
 import tools.StringCollector;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -46,8 +45,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String confirm=confirm_password.getText().toString();
                 if(!nickname.equals("")&&!password.equals("")&&!confirm.equals("")) {
                     if(password.equals(confirm)) {
-                        if(nickname.length()<4||nickname.length()>15) {
-                            Toast.makeText(RegisterActivity.this, "用户名长度应该在4~15位，请重新修改用户名长度", Toast.LENGTH_SHORT).show();
+                        if(nickname.length()<2||nickname.length()>15) {
+                            Toast.makeText(RegisterActivity.this, "用户名长度应该在2~15位，请重新修改用户名长度", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         if(password.length()<6||password.length()>18) {
@@ -56,8 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
                         }
 
                         Toast.makeText(RegisterActivity.this, password, Toast.LENGTH_SHORT).show();
-
-                        AsynTaskUtil.AsynNetUtils.post(StringCollector.getUserServer(), ParamToJSON.formRegisterJson(nickname, MD5Util.getMd5(password)), new AsynTaskUtil.AsynNetUtils.Callback() {
+                        AsynTaskUtil.AsynNetUtils.post(StringCollector.getUserServer(), ParamToString.formRegister(nickname, password), new AsynTaskUtil.AsynNetUtils.Callback() {
 
                             @Override
                             public void onResponse(String response) {
@@ -68,19 +66,14 @@ public class RegisterActivity extends AppCompatActivity {
                                     try {
                                         jsonObj=new JSONObject(result);
                                         int code=jsonObj.optInt("code", -1);
-                                        if(code==200) {
-                                            JSONObject data = jsonObj.getJSONObject("data");
+                                        if(code==0) {
+
                                             Toast.makeText(RegisterActivity.this, "注册成功，即将跳转登录界面", Toast.LENGTH_SHORT).show();
-                                            AlertDialogUtil.makeRegisterResultDialog(RegisterActivity.this, data.optString("username", "null"), data.optString("nickname", "null"));
+                                            AlertDialogUtil.makeRegisterResultDialog(RegisterActivity.this, jsonObj.optString("userid", "null"), jsonObj.optString("nickname", "null"));
                                             //finish();
 
-                                        } else if(code!=-1) {
-
-                                            Toast.makeText(RegisterActivity.this,jsonObj.optString("msg"),Toast.LENGTH_LONG).show();
-
-
-                                        } else {
-                                            Toast.makeText(RegisterActivity.this, "网络或服务器错误，请稍后再试", Toast.LENGTH_SHORT).show();
+                                        } else if(code<0) {
+                                            Toast.makeText(RegisterActivity.this,jsonObj.optString("msg","未知错误"),Toast.LENGTH_LONG).show();
                                         }
 
                                     } catch (JSONException e) {
@@ -89,7 +82,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 } else {
                                     Toast.makeText(RegisterActivity.this, "网络错误，请稍后再试", Toast.LENGTH_SHORT).show();
                                 }
-
                             }
                         });
 
@@ -98,7 +90,6 @@ public class RegisterActivity extends AppCompatActivity {
                         set_password.setText("");
                         confirm_password.setText("");
                     }
-
                 }else {
                     Toast.makeText(RegisterActivity.this, "用户名或密码不能为空", Toast.LENGTH_SHORT).show();
                 }

@@ -8,9 +8,9 @@ public class BoardDBHelper extends SQLiteOpenHelper {
 
     final static String dbname = "board.db";
 
-    final static String CREATE_TABLE_MSG = "create table msg(_id INTEGER PRIMARY KEY AUTOINCREMENT,userid text,time text,content text,picture BLOB)";
-    final static String CREATE_TABLE_USER_INFO = "create table userinfo(id INTEGER primary key autoincrement,userid text,nickname text,portrait BLOB,email text,checktime text,statue integer,token text,data BLOB)";
-    final static String CREATE_TABLE_PUBLIC_INFO = "create table publicinfo(id INTEGER primary key autoincrement,userid text,nickname text,portrait BLOB)";
+    final static String CREATE_TABLE_MSG = "create table msg(_id INTEGER PRIMARY KEY AUTOINCREMENT,id INTEGER not null,userid text not null,time text not null,content text not null,haspic INTEGER not null,picture BLOB)";
+    final static String CREATE_TABLE_USER_INFO = "create table userinfo(id INTEGER primary key autoincrement,userid text not null,nickname text not null,portrait BLOB not null,email text not null,checktime text not null,priority integer not null,token text not null,data BLOB)";
+    final static String CREATE_TABLE_PUBLIC_INFO = "create table publicinfo(id INTEGER primary key autoincrement,userid text not null,nickname text not null,portrait BLOB not null)";
 
     final static int DB_VERSION = 1;
 

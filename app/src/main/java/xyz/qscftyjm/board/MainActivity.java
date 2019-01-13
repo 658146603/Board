@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import postutil.AsynTaskUtil;
-import tools.ParamToJSON;
+import tools.ParamToString;
 import tools.StringCollector;
 import tools.TimeUtil;
 
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        boardDBHelper=BoardDBHelper.getMsgDBHelper(this);
+        database=boardDBHelper.getWritableDatabase();
 
         bottomNavigationView=findViewById(R.id.main_bottom_navigation);
         mainViewPager=findViewById(R.id.main_parent_frag);
@@ -75,14 +78,25 @@ public class MainActivity extends AppCompatActivity {
 
         //startActivity(new Intent(MainActivity.this,MsgDetailActivity.class));
 
+//        /**
+//         * http://localhost:8080/board/user?method=login&userid=10001&password=E10ADC3949BA59ABBE56E057F20F883E
+//         * http://localhost:8080/board/user?method=autologin&userid=10001&token=02bdf3327cd94f2bace333f35e11fd04
+//         * http://localhost:8080/board/user?method=register&nickname=10001&password=E10ADC3949BA59ABBE56E057F20F883E
+//         * http://localhost:8080/board/user?method=changeinfo&userid=10001&token=270cc92204de4bb48d11e137695e6604&portrait=00000000
+//         * http://localhost:8080/board/user?method=changepassword&userid=10003&password=1222211221212121&newpassword=E10ADC3949BA59ABBE56E057F20F883E
+//         * http://localhost:8080/board/user?method=getpublicinfo&userids=['10001','10002','100']
+//         * http://localhost:8080/board/user?method=getuserinfo&userid=10001&token=f0956e4857564917ba13008debcd6432
+//         */
+
+//        AsynTaskUtil.AsynNetUtils.post(StringCollector.LOCAL_USER, "method=getpublicinfo&userids=['10001','10002','100']", new AsynTaskUtil.AsynNetUtils.Callback() {
+//            @Override
+//            public void onResponse(String response) {
+//                if(response!=null){Log.d(TAG,response);}
+//            }
+//        });
+
         /**
-         * http://localhost:8080/board/user?method=login&userid=10001&password=E10ADC3949BA59ABBE56E057F20F883E
-         * http://localhost:8080/board/user?method=autologin&userid=10001&token=02bdf3327cd94f2bace333f35e11fd04
-         * http://localhost:8080/board/user?method=register&nickname=10001&password=E10ADC3949BA59ABBE56E057F20F883E
-         * http://localhost:8080/board/user?method=changeinfo&userid=10001&token=270cc92204de4bb48d11e137695e6604&portrait=00000000
-         * http://localhost:8080/board/user?method=changepassword&userid=10003&password=1222211221212121&newpassword=E10ADC3949BA59ABBE56E057F20F883E
-         * http://localhost:8080/board/user?method=getpublicinfo&userids=['10001','10002','100']
-         * http://localhost:8080/board/user?method=getuserinfo&userid=10001&token=f0956e4857564917ba13008debcd6432
+         * Check the account
          */
 
 //        AsynTaskUtil.AsynNetUtils.post(StringCollector.getUserServer(), "method=autologin&userids=['10001','10002','100']", new AsynTaskUtil.AsynNetUtils.Callback() {
