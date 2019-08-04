@@ -24,10 +24,9 @@ public class NetUtils {
             conn.setDoOutput(true);// 设置此方法,允许向服务器输出内容
 
             // post请求的参数
-            String data = content;
             // 获得一个输出流,向服务器写数据,默认情况下,系统不允许向服务器输出内容
             OutputStream out = conn.getOutputStream();// 获得一个输出流,向服务器写数据
-            out.write(data.getBytes());
+            out.write(content.getBytes());
             out.flush();
             out.close();
 
